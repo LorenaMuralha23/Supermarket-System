@@ -1,15 +1,19 @@
 package Entities;
+
+import java.util.Random;
+
 public class Produto {
 
     private String nome;
     private float valor;
     private String descricao;
-    private int id;
+    private double id;
+    public static Random random = new Random();
 
      public Produto() {
      }
 
-    public Produto(String nome, float valor, String descricao, int id) {
+    public Produto(String nome, float valor, String descricao, double id) {
         this.nome = nome;
         this.valor = valor;
         this.descricao = descricao;
@@ -40,7 +44,7 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public int getId() {
+    public double getId() {
         return id;
     }
 
@@ -48,9 +52,11 @@ public class Produto {
         this.id = id;
     }
     
+    
+    
     @Override
     public String toString() {
-        return "Produto{" + "\nnome=" + nome + "\nValor=" + valor + "\nDescricao=" + descricao + '}';
+        return "Produto{" + "\nnome=" + nome + "\nValor=" + valor + "\nDescricao=" + descricao + "\nid: "+ id +  '}';
     }
         
     

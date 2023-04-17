@@ -1,11 +1,11 @@
 package trabalho1_doo;
 
-import GUI.Window;
+import GUI.Janela;
 
 public class Main {
 
     public static void main(String[] args) {
-        Window window= new Window();
+        Janela window= new Janela();
         window.setVisible(true);
         window.setLocationRelativeTo(null);
     }

@@ -1,7 +1,14 @@
 package GUI;
 
-public class Login extends javax.swing.JPanel {
+import Entities.User;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
+import javax.swing.SwingUtilities;
 
+public class Login extends javax.swing.JPanel {
+    
+    
     public Login() {
         initComponents();
     }
@@ -15,12 +22,12 @@ public class Login extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nomeField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        cpfField = new javax.swing.JTextField();
+        admOptn = new javax.swing.JRadioButton();
+        clienteOptn = new javax.swing.JRadioButton();
+        loginBtn = new javax.swing.JButton();
         imgPainel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -45,10 +52,10 @@ public class Login extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Bem vindo! Entre com os dados para iniciar");
 
-        jTextField1.setBackground(new java.awt.Color(204, 204, 255));
-        jTextField1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        nomeField.setBackground(new java.awt.Color(204, 204, 255));
+        nomeField.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        nomeField.setForeground(new java.awt.Color(0, 0, 0));
+        nomeField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -56,27 +63,33 @@ public class Login extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("CPF:");
 
-        jTextField2.setBackground(new java.awt.Color(204, 204, 255));
-        jTextField2.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cpfField.setBackground(new java.awt.Color(204, 204, 255));
+        cpfField.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        cpfField.setForeground(new java.awt.Color(0, 0, 0));
+        cpfField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jRadioButton1.setBackground(new java.awt.Color(153, 153, 255));
-        admOrClientGroup.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        jRadioButton1.setText("Admnistrador");
+        admOptn.setBackground(new java.awt.Color(153, 153, 255));
+        admOrClientGroup.add(admOptn);
+        admOptn.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        admOptn.setText("Admnistrador");
 
-        jRadioButton2.setBackground(new java.awt.Color(153, 153, 255));
-        admOrClientGroup.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        jRadioButton2.setText("Cliente");
+        clienteOptn.setBackground(new java.awt.Color(153, 153, 255));
+        admOrClientGroup.add(clienteOptn);
+        clienteOptn.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        clienteOptn.setText("Cliente");
 
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Log in");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loginBtn.setBackground(new java.awt.Color(102, 102, 255));
+        loginBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        loginBtn.setForeground(new java.awt.Color(255, 255, 255));
+        loginBtn.setText("Log in");
+        loginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginBtnMouseClicked(evt);
+            }
+        });
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginBtnActionPerformed(evt);
             }
         });
 
@@ -94,19 +107,19 @@ public class Login extends javax.swing.JPanel {
                                 .addGap(46, 46, 46)
                                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
-                                    .addComponent(jTextField1)))
+                                    .addComponent(nomeField)))
                             .addGroup(loginPanelLayout.createSequentialGroup()
                                 .addGap(45, 45, 45)
                                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(cpfField, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
                         .addContainerGap(78, Short.MAX_VALUE)
-                        .addComponent(jRadioButton1)
+                        .addComponent(admOptn)
                         .addGap(57, 57, 57)
-                        .addComponent(jRadioButton2)
+                        .addComponent(clienteOptn)
                         .addGap(40, 40, 40)))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
@@ -120,17 +133,17 @@ public class Login extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cpfField, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(admOptn)
+                    .addComponent(clienteOptn))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(71, Short.MAX_VALUE))
         );
 
@@ -174,24 +187,67 @@ public class Login extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_loginBtnActionPerformed
 
+    private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
+        /*
+        1- Verificar se os campos estão vazios
+            Se sim{ - limpar eles (criar metodo) e exibir mensagem de erro}
+        
+        2- Exibir a janela de acordo com o tipo de usuario
+            Criar um metodo generico ????
+        */
+        
+        
+        if(nomeField.getText().equals("") || cpfField.getText().equals("") || (!admOptn.isSelected() && !clienteOptn.isSelected())){
+            JOptionPane.showMessageDialog(null,"TODOS os campos precisam estar preenchidos!", "Erro!", JOptionPane.ERROR_MESSAGE);
+            limpaFields();
+        }else{
+            JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(this);
+            String nome = nomeField.getText();
+            String cpf = cpfField.getText();
+            int tipoCliente;
+            
+            if(admOptn.isSelected()){
+                tipoCliente = 1;
+                User usuario = new User(nome, cpf, tipoCliente);
+                limpaFields();
+                Janela.painelCadastro = new Cadastro_prod(usuario);
+                Janela.iniciaJanela(janela, Janela.painelLogin, Janela.painelCadastro);
+            }else{
+                tipoCliente = 2;
+                limpaFields();
+                Janela.iniciaJanela(janela, Janela.painelLogin, Janela.painelCliente);
+                User usuario = new User(nome, cpf, tipoCliente);
+            }
+            
+        }
+        
+    }//GEN-LAST:event_loginBtnMouseClicked
+    
+    public void limpaFields(){
+        nomeField.setText("");
+        cpfField.setText("");
+        admOrClientGroup.clearSelection();
+    }
+    
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton admOptn;
     private javax.swing.ButtonGroup admOrClientGroup;
+    private javax.swing.JRadioButton clienteOptn;
+    private javax.swing.JTextField cpfField;
     private javax.swing.JPanel imgPainel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton loginBtn;
     private javax.swing.JPanel loginPanel;
+    private javax.swing.JTextField nomeField;
     // End of variables declaration//GEN-END:variables
 }
