@@ -8,26 +8,28 @@ import javax.swing.SwingUtilities;
 
 public class Janela extends javax.swing.JFrame {
 
-     //Paineis
-    static Login painelLogin;
+     //Painel geral
+    static Login_painel painelLogin;
     
     //Paineis para adms
-    static Cadastro_prod painelCadastro;
-    static Produtos_panel painelProduto;
+    static CadastrarProduto_painel painelCadastro;
+    static ConfigProduto_painel painelProduto;
     
     //Paineis pra clientes
-    static Client_panel painelCliente;
+    static Vitrine_painel painelCliente;
+    static Carrinho_painel painelCarrinho;
+    static Compra_Painel painelCompra;
     
     public Janela() {
+        
         initComponents();
         
         this.setLayout(new BorderLayout());
         
-        painelLogin = new Login();
+        painelLogin = new Login_painel();
         
         this.add(painelLogin);
         this.pack();
-        
         
     }
     
@@ -50,40 +52,7 @@ public class Janela extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Janela().setVisible(true);
-            }
-        });
-    }
-    
+        
     public static void iniciaJanela(JFrame janela, JPanel painelExcluir, JPanel novoPainel){
         janela.getContentPane().remove(painelExcluir);
         janela.add(novoPainel, BorderLayout.CENTER);

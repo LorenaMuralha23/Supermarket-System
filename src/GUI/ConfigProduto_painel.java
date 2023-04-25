@@ -8,24 +8,23 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author User
- */
-public class Produtos_panel extends javax.swing.JPanel {
+
+public class ConfigProduto_painel extends javax.swing.JPanel {
     
-    ArrayList<Double> IDs = new ArrayList<>();
+    
     DefaultTableModel model;
     Object[] rowData;
-    boolean foiLigada = false; //verifica se a tela ja estava ligada anteriormente para manter seu estado
+    
 
-    public Produtos_panel() {
+    public ConfigProduto_painel() {
         initComponents();
+        System.out.println("UOPA");
         
         model = (DefaultTableModel) produtosTable.getModel();
         
         setEnableBtns(false, false, false);
         setEditableFields(false, false, false);
+        
         
         iniciaTabela();
         
@@ -37,7 +36,6 @@ public class Produtos_panel extends javax.swing.JPanel {
         
         for (int i = 0; i < Supermercado.listaProdutos.size(); i++) {
             rowData[0] = Supermercado.listaProdutos.get(i).getNome();
-            IDs.add(Supermercado.listaProdutos.get(i).getId());
             model.addRow(rowData);
         }
         
@@ -85,8 +83,6 @@ public class Produtos_panel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("PRODUTOS");
 
-        produtosTable.setBackground(new java.awt.Color(255, 255, 255));
-        produtosTable.setForeground(new java.awt.Color(0, 0, 0));
         produtosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -119,22 +115,16 @@ public class Produtos_panel extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel4.setText("Descrição:");
 
-        nomeField.setBackground(new java.awt.Color(255, 255, 255));
         nomeField.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        nomeField.setForeground(new java.awt.Color(0, 0, 0));
 
-        valorField.setBackground(new java.awt.Color(255, 255, 255));
         valorField.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        valorField.setForeground(new java.awt.Color(0, 0, 0));
         valorField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valorFieldActionPerformed(evt);
             }
         });
 
-        descricaoField.setBackground(new java.awt.Color(255, 255, 255));
         descricaoField.setColumns(20);
-        descricaoField.setForeground(new java.awt.Color(0, 0, 0));
         descricaoField.setRows(5);
         jScrollPane2.setViewportView(descricaoField);
 
@@ -185,7 +175,6 @@ public class Produtos_panel extends javax.swing.JPanel {
         idField.setEditable(false);
         idField.setBackground(new java.awt.Color(255, 255, 255));
         idField.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        idField.setForeground(new java.awt.Color(0, 0, 0));
         idField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idFieldActionPerformed(evt);
@@ -242,11 +231,12 @@ public class Produtos_panel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel5)
+                                .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -289,17 +279,17 @@ public class Produtos_panel extends javax.swing.JPanel {
 
     private void produtosTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_produtosTableMouseClicked
         setEditableFields(false, false, false);
-        setEnableBtns(true, true, true);
-        
+        setEnableBtns(true, true, false);
+
         int rowIndex = produtosTable.getSelectedRow();
         String produtoSelecionado = produtosTable.getValueAt(rowIndex, 0).toString();
         
-        for(Produto p : Supermercado.listaProdutos){
-           if(p.getId() == IDs.get(rowIndex)){
-               nomeField.setText(p.getNome());
-               valorField.setText(String.valueOf(p.getValor()));
-               descricaoField.setText(p.getDescricao());
-               idField.setText(String.valueOf(p.getId()));
+        for (int i = 0; i < Supermercado.listaProdutos.size(); i++) {
+            if(Supermercado.listaProdutos.get(i).getId() == Supermercado.IDs.get(rowIndex)){
+               nomeField.setText(Supermercado.listaProdutos.get(i).getNome());
+               valorField.setText(String.valueOf(Supermercado.listaProdutos.get(i).getValor()));
+               descricaoField.setText(Supermercado.listaProdutos.get(i).getDescricao());
+               idField.setText(String.valueOf(Supermercado.listaProdutos.get(i).getId()));
            }
         }
         
@@ -315,6 +305,7 @@ public class Produtos_panel extends javax.swing.JPanel {
 
     private void editarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarBtnMouseClicked
         setEditableFields(true, true, true);
+        setEnableBtns(true, true, true);
     }//GEN-LAST:event_editarBtnMouseClicked
 
     private void atualizarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atualizarBtnMouseClicked
@@ -323,7 +314,7 @@ public class Produtos_panel extends javax.swing.JPanel {
         
         String warningMsg = "Tem certeza que deseja atualizar os dados desse produto? " + 
                 "\nProduto Modificado: " + produtoSelecionado +
-                "\nID: " + IDs.get(rowIndex);
+                "\nID: " + Supermercado.IDs.get(rowIndex);
         
         //0 = sim / 1 - nao / 2 - opcao cancelada
         int opcao = JOptionPane.showConfirmDialog(null, warningMsg);
@@ -331,7 +322,7 @@ public class Produtos_panel extends javax.swing.JPanel {
         switch(opcao){
             case 0:
                 for(Produto p : Supermercado.listaProdutos){
-                    if(p.getNome().equals(produtoSelecionado) && (p.getId() == IDs.get(rowIndex))){
+                    if(p.getNome().equals(produtoSelecionado) && (p.getId() == Supermercado.IDs.get(rowIndex))){
                         try {
                             
                             if(verificaFields() == false){//verifica se algum campo está vazio
@@ -377,7 +368,39 @@ public class Produtos_panel extends javax.swing.JPanel {
     }//GEN-LAST:event_voltarBtnMouseClicked
 
     private void removerBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removerBtnMouseClicked
-        //fazer logica de remoção
+        int rowIndex = produtosTable.getSelectedRow();
+        double idSelecionado = Supermercado.IDs.get(rowIndex);
+        String warningMsg = "Tem certeza que deseja exluir o produto selecionado?" + 
+                "\nProduto: " + model.getValueAt(rowIndex, 0).toString() + 
+                "\nId: " + idSelecionado;
+        
+        int option = JOptionPane.showConfirmDialog(null, warningMsg);
+        
+        switch(option){
+            case 0:
+                for (int i = 0; i < Supermercado.listaProdutos.size(); i++) {
+                    if(Supermercado.listaProdutos.get(i).getId() == idSelecionado){
+                        Supermercado.listaProdutos.remove(Supermercado.listaProdutos.get(i));
+                        Supermercado.IDs.remove(i);
+                    }
+                }
+                model.removeRow(rowIndex);
+                JOptionPane.showMessageDialog(null, "Produto Excluido com sucesso!");
+                
+                if(Supermercado.listaProdutos.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Não há mais produtos disponíveis!");
+                    JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(this);
+                    Janela.iniciaJanela(janela, Janela.painelProduto, Janela.painelCadastro);
+                };
+                limparFields();
+               
+            break;
+            
+            case 1,2:
+                JOptionPane.showMessageDialog(null, "Operação cancelada com sucesso!");
+            break;
+            
+        }
     }//GEN-LAST:event_removerBtnMouseClicked
 
     private boolean verificaFields(){
@@ -389,6 +412,12 @@ public class Produtos_panel extends javax.swing.JPanel {
         }
     }
     
+    public void limparFields(){
+        nomeField.setText("");
+        valorField.setText("");
+        descricaoField.setText("");
+        idField.setText("");
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atualizarBtn;

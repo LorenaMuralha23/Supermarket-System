@@ -7,17 +7,34 @@ public class Produto {
     private String nome;
     private float valor;
     private String descricao;
-    private double id;
+    private long id;
+    private int quantidadeComprada=0;
     public static Random random = new Random();
+    
 
      public Produto() {
      }
 
-    public Produto(String nome, float valor, String descricao, double id) {
+    public Produto(String nome, float valor, String descricao) {
         this.nome = nome;
         this.valor = valor;
         this.descricao = descricao;
-        this.id = id;
+        
+        long idGerado = random.nextLong(1,999)*100;
+        boolean idIguais = true;
+      
+        while(idIguais){ //impede que o sistema gere ids iguais para produtos difentes
+            idIguais = false;
+            for (int i = 0; i < Supermercado.IDs.size(); i++) {
+                if(Supermercado.IDs.get(i) == idGerado){
+                    idIguais = true;
+                    idGerado = random.nextLong(1,999)*100;
+                    break;
+                }
+            } 
+        }         
+        
+        this.id = idGerado;
     }
 
     public String getNome() {
@@ -51,12 +68,21 @@ public class Produto {
     public void setId(int id) {
         this.id = id;
     }
+
+    public int getQuantidadeComprada() {
+        return quantidadeComprada;
+    }
+
+    public void setQuantidadeComprada(int quantidade) {
+        this.quantidadeComprada = quantidade;
+    }
+    
     
     
     
     @Override
     public String toString() {
-        return "Produto{" + "\nnome=" + nome + "\nValor=" + valor + "\nDescricao=" + descricao + "\nid: "+ id +  '}';
+        return "\nProduto{" + "\nnome=" + nome + "\nValor=" + valor + "\nQuantidade: " + quantidadeComprada + "\nDescricao=" + descricao + "\nid: "+ id +  '}';
     }
         
     

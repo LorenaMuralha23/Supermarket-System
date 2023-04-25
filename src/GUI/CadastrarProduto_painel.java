@@ -7,11 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-public class Cadastro_prod extends javax.swing.JPanel {
+public class CadastrarProduto_painel extends javax.swing.JPanel {
     
  
-    public Cadastro_prod(User admLogado) {
+    public CadastrarProduto_painel(User admLogado) {
         initComponents();
+        
         admNomeLabel.setText(admLogado.getNome());
     }
 
@@ -32,7 +33,7 @@ public class Cadastro_prod extends javax.swing.JPanel {
         descProdField = new javax.swing.JTextArea();
         cadastrarBtn = new javax.swing.JButton();
         visualizarBtn = new javax.swing.JButton();
-        voltarBtn = new javax.swing.JButton();
+        sairBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
 
@@ -91,13 +92,13 @@ public class Cadastro_prod extends javax.swing.JPanel {
             }
         });
 
-        voltarBtn.setBackground(new java.awt.Color(124, 129, 255));
-        voltarBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        voltarBtn.setForeground(new java.awt.Color(255, 255, 255));
-        voltarBtn.setText("Voltar");
-        voltarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        sairBtn.setBackground(new java.awt.Color(124, 129, 255));
+        sairBtn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        sairBtn.setForeground(new java.awt.Color(255, 255, 255));
+        sairBtn.setText("Sair");
+        sairBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                voltarBtnMouseClicked(evt);
+                sairBtnMouseClicked(evt);
             }
         });
 
@@ -130,7 +131,7 @@ public class Cadastro_prod extends javax.swing.JPanel {
                                 .addComponent(nomeProdField, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1)
                             .addGroup(cadastroPanelLayout.createSequentialGroup()
-                                .addComponent(voltarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(sairBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(visualizarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(42, Short.MAX_VALUE))
@@ -161,7 +162,7 @@ public class Cadastro_prod extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(cadastroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(visualizarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
-                    .addComponent(voltarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(sairBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(33, 33, 33))
         );
 
@@ -219,8 +220,9 @@ public class Cadastro_prod extends javax.swing.JPanel {
                     throw new IllegalArgumentException();
                 }
                 String descricao = descProdField.getText();
-                Produto produto = new Produto(nomeProd, valor, descricao, Produto.random.nextDouble()*100);
+                Produto produto = new Produto(nomeProd, valor, descricao);
                 Supermercado.listaProdutos.add(produto);
+                Supermercado.IDs.add(produto.getId());
                 JOptionPane.showMessageDialog(null,"Produto cadastrado com sucesso!", "Mensagem!", JOptionPane.INFORMATION_MESSAGE);
                 limpaFields();
                 
@@ -236,14 +238,19 @@ public class Cadastro_prod extends javax.swing.JPanel {
         
     }//GEN-LAST:event_cadastrarBtnMouseClicked
 
-    private void voltarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarBtnMouseClicked
-
-        JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(this);
-        Janela.iniciaJanela(janela, Janela.painelCadastro, Janela.painelLogin);
-    }//GEN-LAST:event_voltarBtnMouseClicked
+    private void sairBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sairBtnMouseClicked
+        
+        int option = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?\nAlerta: Se sair, sua conta será deslogada automaticamente", "AVISO", JOptionPane.YES_OPTION);
+        
+        if(option == 0){
+            JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(this);
+            Janela.iniciaJanela(janela, Janela.painelCadastro, Janela.painelLogin);
+        }
+        
+    }//GEN-LAST:event_sairBtnMouseClicked
 
     private void visualizarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_visualizarBtnMouseClicked
-        Janela.painelProduto = new Produtos_panel();
+        Janela.painelProduto = new ConfigProduto_painel();
         JFrame janela = (JFrame) SwingUtilities.getWindowAncestor(this);
         Janela.iniciaJanela(janela, Janela.painelCadastro, Janela.painelProduto);
     }//GEN-LAST:event_visualizarBtnMouseClicked
@@ -268,8 +275,8 @@ public class Cadastro_prod extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nomeProdField;
+    private javax.swing.JButton sairBtn;
     private javax.swing.JTextField valorProdField;
     private javax.swing.JButton visualizarBtn;
-    private javax.swing.JButton voltarBtn;
     // End of variables declaration//GEN-END:variables
 }

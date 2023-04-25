@@ -1,13 +1,18 @@
 package Entities;
 
+import GUI.ConfigProduto_painel;
 import java.util.ArrayList;
 
 public class Supermercado {
     
     public String nome;
     public static ArrayList<Produto> listaProdutos = new ArrayList<>();
+    public static ArrayList<User> admDB = new ArrayList<>();
+    public static ArrayList<User> clientsDB = new ArrayList<>();
+    public static ArrayList<Double> IDs = new ArrayList<>();
 
     public Supermercado() {
+        
     }
 
     public Supermercado(String nome) {
@@ -40,4 +45,30 @@ public class Supermercado {
        }
    }
     
+   public float calculaValorProduto(double idProduto, int quantidade){
+       Produto produtoSelecionado=null;
+       
+       for (int i = 0; i < listaProdutos.size(); i++) {
+           if(idProduto == listaProdutos.get(i).getId()){
+               produtoSelecionado = listaProdutos.get(i);
+           }
+       }
+       
+       return (produtoSelecionado.getValor() * produtoSelecionado.getQuantidadeComprada());
+   }
+   
+   public float calculaValorConta(ArrayList<Produto> produtosCarrinho){
+       float totalConta = 0;
+       
+       for (int i = 0; i < produtosCarrinho.size(); i++) {
+           totalConta += calculaValorProduto(produtosCarrinho.get(i).getId(), produtosCarrinho.get(i).getQuantidadeComprada());
+       }
+       
+       return totalConta;
+   }
+   
+   public float calculaValorProduto(Produto produto){
+       return produto.getValor() * produto.getQuantidadeComprada();
+   }
+   
 }
